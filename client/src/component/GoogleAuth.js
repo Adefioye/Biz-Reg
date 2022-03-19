@@ -9,18 +9,6 @@ function GoogleAuth() {
   const dispatch = useDispatch();
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
 
-  // const handleAuthChange = () =>
-  //   useCallback(
-  //     (isSignedIn) => {
-  //       if (isSignedIn) {
-  //         dispatch(signIn());
-  //       } else {
-  //         dispatch(signOut());
-  //       }
-  //     },
-  //     [dispatch]
-  //   );
-
   useEffect(() => {
     function handleAuthChange(isSignedIn) {
       if (isSignedIn) {
@@ -58,6 +46,7 @@ function GoogleAuth() {
   };
 
   const renderAuthButton = () => {
+    console.log(isSignedIn);
     if (isSignedIn === null) {
       return null;
     } else if (isSignedIn) {

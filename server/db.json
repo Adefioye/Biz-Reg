@@ -1,0 +1,44 @@
+{
+  "businesses": [
+    {
+      "name": "Access Bank",
+      "industry": "Financials",
+      "sector": "Banks",
+      "headquarter": "Lagos",
+      "year": 1989,
+      "notes": "Commercial bank"
+    },
+    {
+      "name": "Aero Contractors",
+      "industry": "Consumer services",
+      "sector": "Airlines",
+      "headquarter": "Ikeja",
+      "year": 1959,
+      "notes": "State charter airline"
+    },
+    {
+      "name": "Arik Air",
+      "industry": "Consumer services",
+      "sector": "Airlines",
+      "headquarter": "Ikeja",
+      "year": 2002,
+      "notes": "Airline"
+    },
+    {
+      "name": "Bates Cosse",
+      "industry": "Consumer services",
+      "sector": "Media",
+      "headquarter": "Lagos",
+      "year": 1995,
+      "notes": "Marketing communications"
+    },
+    {
+      "name": "Cassava Republic Press",
+      "industry": "Consumer services",
+      "sector": "Publishing",
+      "headquarter": "Abuja",
+      "year": 2006,
+      "notes": "Publisher"
+    }
+  ]
+}

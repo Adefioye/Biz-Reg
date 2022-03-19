@@ -1,2 +1,7 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
+export const CREATE_BUSINESS = "CREATE_BUSINESS";
+export const FETCH_BUSINESS = "FETCH_BUSINESS";
+export const FETCH_BUSINESSES = "FETCH_BUSINESSES";
+export const EDIT_BUSINESS = "EDIT_BUSINESS";
+export const DELETE_BUSINESS = "DELETE_BUSINESS";

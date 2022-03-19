@@ -8,7 +8,7 @@ import GoogleAuth from "./GoogleAuth";
 
 function Header() {
   return (
-    <AppBar>
+    <AppBar position="fixed">
       <Toolbar>
         <Grid container justifyContent="space-between" direction="row">
           <Grid item>
