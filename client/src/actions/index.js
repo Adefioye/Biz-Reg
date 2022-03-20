@@ -29,3 +29,12 @@ export const fetchBusinesses = () => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const createBusiness = (formValues) => async (dispatch) => {
+  try {
+    const response = await businesses.post("/businesses", formValues);
+    dispatch({ type: CREATE_BUSINESS, payload: response.data });
+  } catch (err) {
+    console.log(err);
+  }
+};

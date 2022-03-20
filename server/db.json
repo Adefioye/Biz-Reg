@@ -6,7 +6,8 @@
       "sector": "Banks",
       "headquarter": "Lagos",
       "year": 1989,
-      "notes": "Commercial bank"
+      "notes": "Commercial bank",
+      "id": 1
     },
     {
       "name": "Aero Contractors",
@@ -14,7 +15,8 @@
       "sector": "Airlines",
       "headquarter": "Ikeja",
       "year": 1959,
-      "notes": "State charter airline"
+      "notes": "State charter airline",
+      "id": 2
     },
     {
       "name": "Arik Air",
@@ -22,23 +24,26 @@
       "sector": "Airlines",
       "headquarter": "Ikeja",
       "year": 2002,
-      "notes": "Airline"
+      "notes": "Airline",
+      "id": 3
     },
     {
-      "name": "Bates Cosse",
-      "industry": "Consumer services",
-      "sector": "Media",
-      "headquarter": "Lagos",
-      "year": 1995,
-      "notes": "Marketing communications"
+      "name": "a",
+      "industry": "a",
+      "sector": "a",
+      "headquarter": "a",
+      "year": "a",
+      "notes": "a",
+      "id": 4
     },
     {
-      "name": "Cassava Republic Press",
-      "industry": "Consumer services",
-      "sector": "Publishing",
-      "headquarter": "Abuja",
-      "year": 2006,
-      "notes": "Publisher"
+      "name": "b",
+      "industry": "b",
+      "sector": "b",
+      "headquarter": "b",
+      "year": "b",
+      "notes": "b",
+      "id": 5
     }
   ]
 }

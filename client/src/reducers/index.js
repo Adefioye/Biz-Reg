@@ -5,7 +5,7 @@ import businessReducer from "./businessReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
-  businesses: businessReducer,
+  business: businessReducer,
 });
 
 export default reducers;
