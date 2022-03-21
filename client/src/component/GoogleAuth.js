@@ -12,9 +12,13 @@ function GoogleAuth() {
   useEffect(() => {
     function handleAuthChange(isSignedIn) {
       if (isSignedIn) {
-        dispatch(signIn());
+        dispatch(
+          signIn(window.gapi.auth2.getAuthInstance().currentUser.get().getId())
+        );
       } else {
-        dispatch(signOut());
+        dispatch(
+          signOut(window.gapi.auth2.getAuthInstance().currentUser.get().getId())
+        );
       }
     }
 
@@ -46,7 +50,6 @@ function GoogleAuth() {
   };
 
   const renderAuthButton = () => {
-    console.log(isSignedIn);
     if (isSignedIn === null) {
       return null;
     } else if (isSignedIn) {

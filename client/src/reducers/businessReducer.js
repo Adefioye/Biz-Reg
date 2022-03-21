@@ -9,15 +9,20 @@ import {
 const INITIAL_STATE = {
   businesses: [],
   business: [],
-  isLoading: true,
 };
 
 const businessReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_BUSINESSES:
-      return {...state, businesses: action.payload, isLoading: false}
+      return { ...state, businesses: action.payload };
     case CREATE_BUSINESS:
-      return {...state, businesses: action.payload, isLoading: false}
+      return { ...state, business: action.payload };
+    case FETCH_BUSINESS:
+      return { ...state, business: [action.payload] };
+    case EDIT_BUSINESS:
+      return { ...state, business: [action.payload] };
+    case DELETE_BUSINESS:
+      return { ...state, business: [] };
     default:
       return state;
   }

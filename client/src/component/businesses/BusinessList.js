@@ -16,6 +16,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Button from "@material-ui/core/Button";
 // import { Link } from "react-router-dom";
 
 import { fetchBusinesses } from "../../actions";
@@ -23,7 +25,7 @@ import { fetchBusinesses } from "../../actions";
 const useStyles = makeStyles((theme) => ({
   businessList: {
     paddingTop: theme.spacing(10),
-    width: "100wh",
+    // width: "90wh",
   },
   addIcon: {
     position: "absolute",
@@ -32,18 +34,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BusinessList() {
+function BusinessList({ setOpenDialog }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const isSignedIn = useSelector((state) => state.auth.isSignedIn);
-  const { businesses, isLoading } = useSelector((state) => state.business);
+  const { isSignedIn } = useSelector((state) => state.auth);
+  const currentUserId = useSelector((state) => state.auth.userId);
+  const { businesses } = useSelector((state) => state.business);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchBusinesses());
-    }
-  }, [dispatch, isLoading]);
+    dispatch(fetchBusinesses());
+  }, [dispatch]);
 
   const businessHeading = [
     "Name",
@@ -52,6 +53,7 @@ function BusinessList() {
     "Headquarters",
     "Founded",
     "Notes",
+    "Actions",
   ];
 
   const renderTable = () => {
@@ -76,6 +78,29 @@ function BusinessList() {
                     <TableCell>{business.headquarter}</TableCell>
                     <TableCell>{business.year}</TableCell>
                     <TableCell>{business.notes}</TableCell>
+                    <TableCell>
+                      {currentUserId === business.userId ? (
+                        <ButtonGroup>
+                          <Button
+                            onClick={() =>
+                              navigate(`/business/edit/${business.id}`)
+                            }
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              navigate(`/business/delete/${business.id}`);
+                              setOpenDialog(true);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </ButtonGroup>
+                      ) : (
+                        <Button>No action</Button>
+                      )}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -109,7 +134,7 @@ function BusinessList() {
       </Grid>
       <Grid item>
         {isSignedIn && (
-          <Tooltip aria-label="add a new business">
+          <Tooltip title="Create a business" aria-label="add a new business">
             <Fab
               color="primary"
               className={classes.addIcon}
