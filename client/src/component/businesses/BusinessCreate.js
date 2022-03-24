@@ -14,6 +14,7 @@ function BusinessCreate() {
     sector: "",
     headquarter: "",
     year: "",
+    dateAdded: new Date(2022, 2, 1),
     notes: "",
   });
 

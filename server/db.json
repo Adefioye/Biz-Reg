@@ -1,22 +1,25 @@
 {
   "businesses": [
     {
-      "name": "Access Bank",
-      "industry": "Financials",
-      "sector": "Banks",
-      "headquarter": "Lagos",
-      "year": "4000",
-      "notes": "Commercial bank",
-      "userId": "105721580996813539692",
-      "id": 1
-    },
-    {
       "name": "Aero Contractors",
       "industry": "Consumer services",
       "sector": "Airlines",
       "headquarter": "Ikeja",
       "year": 1959,
+      "dateAdded": "2022-03-24T09:00:24.739Z",
       "notes": "State charter airline",
+      "userId": "107751868815464507136",
+      "id": 1
+    },
+    {
+      "name": "g",
+      "industry": "g",
+      "sector": "g",
+      "headquarter": "g",
+      "year": "s",
+      "dateAdded": "2022-03-24T09:00:24.739Z",
+      "notes": "s",
+      "userId": "105721580996813539692",
       "id": 2
     },
     {
@@ -24,39 +27,99 @@
       "industry": "Consumer services",
       "sector": "Airlines",
       "headquarter": "Ikeja",
-      "year": 2002,
-      "notes": "Airline",
+      "year": "2002",
+      "dateAdded": "2022-02-01T23:00:00.000Z",
+      "notes": "Airlines",
+      "userId": "105721580996813539692",
       "id": 3
     },
     {
-      "name": "d",
-      "industry": "d",
-      "sector": "d",
-      "headquarter": "d",
-      "year": "d",
-      "notes": "d",
+      "name": "Bates Cosse",
+      "industry": "Consumer services",
+      "sector": "Media",
+      "headquarter": "Lagos",
+      "year": "1995",
+      "dateAdded": "2022-03-02T23:00:00.000Z",
+      "notes": "Marketing communications",
       "userId": "105721580996813539692",
+      "id": 4
+    },
+    {
+      "name": "Central Bank of Nigeria\"",
+      "industry": "Financials",
+      "sector": "Banks",
+      "headquarter": "Abuja",
+      "year": "1958",
+      "dateAdded": "2022-03-03T23:00:00.000Z",
+      "notes": "State-owned bank",
+      "userId": "105721580996813539692",
+      "id": 5
+    },
+    {
+      "name": "C&I Leasing Group plc",
+      "industry": "Industrials",
+      "sector": "Marine transportation",
+      "headquarter": "Lekki",
+      "year": "1990",
+      "dateAdded": "2022-03-05T23:00:00.000Z",
+      "notes": "Leasing",
+      "userId": "107751868815464507136",
+      "id": 6
+    },
+    {
+      "name": "Dangote Cement",
+      "industry": "Industrials",
+      "sector": "Building materials & fixtures",
+      "headquarter": "Lagos",
+      "year": "1992",
+      "dateAdded": "2022-03-07T23:00:00.000Z",
+      "notes": "Cement, part of Dangote Group",
+      "userId": "107751868815464507136",
+      "id": 7
+    },
+    {
+      "name": "Jiji.ng",
+      "industry": "Technology",
+      "sector": "Internet",
+      "headquarter": "Lagos",
+      "year": "2014",
+      "dateAdded": "2022-03-08T23:00:00.000Z",
+      "notes": "Online marketplace",
+      "userId": "107751868815464507136",
+      "id": 8
+    },
+    {
+      "name": "Nigerian National Petroleum Corporation (NNPC)",
+      "industry": "Oil & gas",
+      "sector": "Exploration & production",
+      "headquarter": "Abuja",
+      "year": "1977",
+      "dateAdded": "2022-02-28T23:00:00.000Z",
+      "notes": "State-owned oil",
+      "userId": "108167920180445472915",
+      "id": 9
+    },
+    {
+      "name": "Nigerian Television Authority",
+      "industry": "Consumer services",
+      "sector": "Broadcasting & entertainment",
+      "headquarter": "Abuja",
+      "year": "1977",
+      "dateAdded": "2022-03-08T23:00:00.000Z",
+      "notes": "State-owned television",
+      "userId": "108167920180445472915",
       "id": 10
     },
     {
-      "name": "e",
-      "industry": "e",
-      "sector": "e",
-      "headquarter": "e",
-      "year": "e",
-      "notes": "e",
-      "userId": "105721580996813539692",
+      "name": "Oando",
+      "industry": "Oil & gas",
+      "sector": "Exploration & production",
+      "headquarter": "Lagos",
+      "year": "1956",
+      "dateAdded": "2022-03-09T23:00:00.000Z",
+      "notes": "Petrochemical and energy",
+      "userId": "108167920180445472915",
       "id": 11
-    },
-    {
-      "name": "f",
-      "industry": "f",
-      "sector": "f",
-      "headquarter": "f",
-      "year": "f",
-      "notes": "f",
-      "userId": "107751868815464507136",
-      "id": 12
     }
   ]
 }

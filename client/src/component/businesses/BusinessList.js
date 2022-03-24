@@ -3,12 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -16,9 +10,15 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-// import { Link } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 import { fetchBusinesses } from "../../actions";
 
@@ -28,9 +28,40 @@ const useStyles = makeStyles((theme) => ({
     // width: "90wh",
   },
   addIcon: {
-    position: "absolute",
+    position: "fixed",
     bottom: "2em",
     right: "2em",
+  },
+  filterBar: {
+    marginLeft: "3em",
+    marginRight: "1em",
+    marginTop: "2.5em",
+  },
+  clearButton: {
+    alignSelf: "flex-end",
+    marginRight: "2.2em",
+    marginTop: "2em",
+    marginBottom: "2em",
+  },
+  mainContent: {
+    padding: "1em",
+    marginTop: "1em",
+  },
+  avatar: {
+    width: theme.spacing(15),
+    height: theme.spacing(15),
+  },
+  businessContent: {
+    marginLeft: "2em",
+    maxWidth: "40em",
+  },
+  businessId: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  formControl: {
+    width: "90%",
+    height: 57,
   },
 }));
 
@@ -46,67 +77,64 @@ function BusinessList({ setOpenDialog }) {
     dispatch(fetchBusinesses());
   }, [dispatch]);
 
-  const businessHeading = [
-    "Name",
-    "Industry",
-    "Sector",
-    "Headquarters",
-    "Founded",
-    "Notes",
-    "Actions",
+  const businessHeadings = [
+    "name",
+    "industry",
+    "sector",
+    "headquarter",
+    "year",
+    "dateAdded",
+    "notes",
   ];
 
-  const renderTable = () => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+
+  const renderContent = () => {
     if (businesses.length !== 0) {
       return (
         <>
-          <TableContainer component={Paper}>
-            <Table aria-label="businesses table">
-              <TableHead>
-                <TableRow>
-                  {businessHeading.map((title) => (
-                    <TableCell key={title}>{title}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {businesses.map((business) => (
-                  <TableRow key={business.name}>
-                    <TableCell>{business.name}</TableCell>
-                    <TableCell>{business.industry}</TableCell>
-                    <TableCell>{business.sector}</TableCell>
-                    <TableCell>{business.headquarter}</TableCell>
-                    <TableCell>{business.year}</TableCell>
-                    <TableCell>{business.notes}</TableCell>
-                    <TableCell>
-                      {currentUserId === business.userId ? (
-                        <ButtonGroup>
-                          <Button
-                            onClick={() =>
-                              navigate(`/business/edit/${business.id}`)
-                            }
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              navigate(`/business/delete/${business.id}`);
-                              setOpenDialog(true);
-                            }}
-                          >
-                            Delete
-                          </Button>
-                        </ButtonGroup>
-                      ) : (
-                        <Button>No action</Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          ;
+          {businesses.map((business) => (
+            <Paper
+              elevation={3}
+              key={business.id}
+              className={classes.mainContent}
+            >
+              <Grid item container alignItems="center" direction="row">
+                <Grid item>
+                  <Avatar className={classes.avatar}>{business.name[0]}</Avatar>
+                </Grid>
+                <Grid item className={classes.businessContent}>
+                  <Grid container direction="column">
+                    <Grid item>
+                      <Typography variant="h6">{business.name}</Typography>
+                      <Typography variant="body1">
+                        Founded: {business.year}
+                      </Typography>
+                      <Typography variant="body1">
+                        Date Added:{" "}
+                        {new Date(business.dateAdded).toLocaleDateString(
+                          undefined,
+                          options
+                        )}
+                      </Typography>
+                      <Typography variant="body1">
+                        Headquarter: {business.headquarter}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1">
+                        Description: This business is in the {business.industry}
+                        industry and {business.sector} sector. {business.notes}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item style={{ marginLeft: "auto" }}>
+                  <Avatar className={classes.businessId}>{business.id}</Avatar>
+                </Grid>
+              </Grid>
+            </Paper>
+          ))}
         </>
       );
     } else {
@@ -116,21 +144,60 @@ function BusinessList({ setOpenDialog }) {
 
   return (
     <Grid container className={classes.businessList} direction="column">
-      <Grid item>
-        <Typography align="center" variant="h2">
-          {" "}
-          List of Businesses in Nigeria
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        container
-        position="relative"
-        style={{ height: "50vh" }}
-        justifyContent="center"
-        alignItems="center"
-      >
-        {renderTable()}
+      <Grid item container direction="row">
+        <Grid
+          item
+          container
+          direction="column"
+          md={3}
+          className={classes.filterBar}
+        >
+          <Paper elevation={3}>
+            <Grid item container direction="column">
+              <Grid item style={{ marginLeft: "2em" }}>
+                <Typography variant="h6">Filter Results:</Typography>
+              </Grid>
+              <Grid item style={{ marginLeft: "2em" }}>
+                <Typography>Filter by name</Typography>
+                <TextField variant="outlined" className={classes.formControl} />
+              </Grid>
+              <Grid item style={{ marginLeft: "2em" }}>
+                <Typography>Order by fields</Typography>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel></InputLabel>
+                  <Select>
+                    <option value="">Please select a value</option>
+                    {businessHeadings.map((heading) => (
+                      <option key={heading} value={heading}>
+                        {heading}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item className={classes.clearButton}>
+                <Button variant="outlined">Clear</Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ marginRight: "2em" }}
+          md={8}
+        >
+          <Grid item>
+            <Typography align="center">
+              List of Businesses in Nigeria
+            </Typography>
+          </Grid>
+          <Grid item container direction="column">
+            {renderContent()}
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item>
         {isSignedIn && (
@@ -152,3 +219,50 @@ function BusinessList({ setOpenDialog }) {
 }
 
 export default BusinessList;
+
+{
+  /* <TableContainer component={Paper}>
+  <Table aria-label="businesses table">
+    <TableHead>
+      <TableRow>
+        {businessHeading.map((title) => (
+          <TableCell key={title}>{title}</TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {businesses.map((business) => (
+        <TableRow key={business.name}>
+          <TableCell>{business.name}</TableCell>
+          <TableCell>{business.industry}</TableCell>
+          <TableCell>{business.sector}</TableCell>
+          <TableCell>{business.headquarter}</TableCell>
+          <TableCell>{business.year}</TableCell>
+          <TableCell>{business.notes}</TableCell>
+          <TableCell>
+            {currentUserId === business.userId ? (
+              <ButtonGroup>
+                <Button
+                  onClick={() => navigate(`/business/edit/${business.id}`)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate(`/business/delete/${business.id}`);
+                    setOpenDialog(true);
+                  }}
+                >
+                  Delete
+                </Button>
+              </ButtonGroup>
+            ) : (
+              <Button>No action</Button>
+            )}
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>; */
+}

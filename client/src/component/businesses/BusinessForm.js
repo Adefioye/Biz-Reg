@@ -1,5 +1,12 @@
 import React from "react";
 
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -17,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
 function BusinessForm({ title, onSubmit, formValues, setFormValues }) {
   const classes = useStyles();
 
-  const { name, industry, sector, headquarter, year, notes } = formValues;
+  const { name, industry, sector, headquarter, year, dateAdded, notes } =
+    formValues;
+
+  const convertToDefEventParams = (id, value) => ({ target: { id, value } });
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -65,10 +75,29 @@ function BusinessForm({ title, onSubmit, formValues, setFormValues }) {
           <br />
           <TextField
             label="Year"
+            type="number"
             id="year"
             value={year}
             onChange={(e) => handleInputChange(e)}
           />
+          <br />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              margin="normal"
+              id="dateAdded"
+              variant="inline"
+              label="Date Added"
+              format="MM/dd/yyyy"
+              value={dateAdded}
+              onChange={(date) =>
+                handleInputChange(convertToDefEventParams("dateAdded", date))
+              }
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
           <br />
           <TextField
             label="Notes"

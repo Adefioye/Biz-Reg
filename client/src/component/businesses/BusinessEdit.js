@@ -11,13 +11,13 @@ function BusinessEdit() {
   const { id } = useParams();
   const { business } = useSelector((state) => state.business);
 
-
   const [state, setState] = useState({
     name: "",
     industry: "",
     sector: "",
     headquarter: "",
     year: "",
+    dateAdded: new Date(),
     notes: "",
   });
 
@@ -27,7 +27,7 @@ function BusinessEdit() {
 
   useEffect(() => {
     if (business[0]) {
-      setState({...business[0]});
+      setState({ ...business[0] });
     }
   }, [business]);
 
