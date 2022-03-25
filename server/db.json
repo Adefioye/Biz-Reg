@@ -5,7 +5,7 @@
       "industry": "Consumer services",
       "sector": "Airlines",
       "headquarter": "Ikeja",
-      "year": 1959,
+      "year": "1959",
       "dateAdded": "2022-03-24T09:00:24.739Z",
       "notes": "State charter airline",
       "userId": "107751868815464507136",
@@ -16,7 +16,7 @@
       "industry": "g",
       "sector": "g",
       "headquarter": "g",
-      "year": "s",
+      "year": "4000",
       "dateAdded": "2022-03-24T09:00:24.739Z",
       "notes": "s",
       "userId": "105721580996813539692",
@@ -60,7 +60,7 @@
       "industry": "Industrials",
       "sector": "Marine transportation",
       "headquarter": "Lekki",
-      "year": "1990",
+      "year": 1990,
       "dateAdded": "2022-03-05T23:00:00.000Z",
       "notes": "Leasing",
       "userId": "107751868815464507136",
@@ -120,6 +120,39 @@
       "notes": "Petrochemical and energy",
       "userId": "108167920180445472915",
       "id": 11
+    },
+    {
+      "name": "sss",
+      "industry": "sss",
+      "sector": "ssss",
+      "headquarter": "lagos",
+      "year": "2000",
+      "dateAdded": "2022-02-28T23:00:00.000Z",
+      "notes": "Cement industry",
+      "userId": "107751868815464507136",
+      "id": 12
+    },
+    {
+      "name": "eee",
+      "industry": "eeee",
+      "sector": "eee",
+      "headquarter": "eee",
+      "year": "1978",
+      "dateAdded": "2022-03-10T23:00:00.000Z",
+      "notes": "eerrr",
+      "userId": "107751868815464507136",
+      "id": 13
+    },
+    {
+      "name": "qqqq",
+      "industry": "qqq",
+      "sector": "qqqq",
+      "headquarter": "qqqqq",
+      "year": "1920",
+      "dateAdded": "2022-03-16T23:00:00.000Z",
+      "notes": "ddddd",
+      "userId": "105721580996813539692",
+      "id": 14
     }
   ]
 }

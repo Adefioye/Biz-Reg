@@ -4,6 +4,8 @@ import {
   FETCH_BUSINESSES,
   EDIT_BUSINESS,
   DELETE_BUSINESS,
+  SEARCH_BY_NAME,
+  SORT_BY_FIELD,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -23,6 +25,10 @@ const businessReducer = (state = INITIAL_STATE, action) => {
       return { ...state, business: [action.payload] };
     case DELETE_BUSINESS:
       return { ...state, business: [] };
+    case SEARCH_BY_NAME:
+      return { ...state, businesses: action.payload };
+    case SORT_BY_FIELD:
+      return { ...state, businesses: action.payload };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Grid from "@material-ui/core/Grid";
@@ -19,8 +19,11 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import MenuItem from "@material-ui/core/MenuItem";
 
-import { fetchBusinesses } from "../../actions";
+import { fetchBusinesses, searchByName, sortByField } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   businessList: {
@@ -38,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "2.5em",
   },
   clearButton: {
-    alignSelf: "flex-end",
     marginRight: "2.2em",
     marginTop: "2em",
     marginBottom: "2em",
+    alignSelf: "flex-end",
   },
   mainContent: {
     padding: "1em",
@@ -73,6 +76,9 @@ function BusinessList({ setOpenDialog }) {
   const { businesses } = useSelector((state) => state.business);
   const navigate = useNavigate();
 
+  const [searchName, setSearchName] = useState("");
+  const [sortField, setSortField] = useState("name");
+
   useEffect(() => {
     dispatch(fetchBusinesses());
   }, [dispatch]);
@@ -88,6 +94,26 @@ function BusinessList({ setOpenDialog }) {
   ];
 
   const options = { year: "numeric", month: "long", day: "numeric" };
+
+  const handleSearchName = (e) => {
+    setSearchName(e.target.value);
+    dispatch(searchByName(searchName));
+  };
+
+  const handleSortByField = (e) => {
+    setSortField(e.target.value);
+    console.log(sortField);
+    dispatch(sortByField(sortField));
+  };
+
+  const handleClearButton = () => {
+    dispatch(fetchBusinesses());
+  };
+
+  const handleDeletePage = (business) => {
+    navigate(`business/delete/${business.id}`);
+    setOpenDialog(true);
+  };
 
   const renderContent = () => {
     if (businesses.length !== 0) {
@@ -131,6 +157,33 @@ function BusinessList({ setOpenDialog }) {
                 </Grid>
                 <Grid item style={{ marginLeft: "auto" }}>
                   <Avatar className={classes.businessId}>{business.id}</Avatar>
+                  {currentUserId === business.userId ? (
+                    <>
+                      <Avatar
+                        className={classes.businessId}
+                        style={{
+                          marginTop: "1em",
+                          marginBottom: "1em",
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          navigate(`/business/edit/${business.id}`)
+                        }
+                      >
+                        <EditIcon />
+                      </Avatar>
+                      <Avatar
+                        className={classes.businessId}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          navigate(`business/delete/${business.id}`);
+                          setOpenDialog(true);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </Avatar>
+                    </>
+                  ) : null}
                 </Grid>
               </Grid>
             </Paper>
@@ -159,24 +212,37 @@ function BusinessList({ setOpenDialog }) {
               </Grid>
               <Grid item style={{ marginLeft: "2em" }}>
                 <Typography>Filter by name</Typography>
-                <TextField variant="outlined" className={classes.formControl} />
+                <TextField
+                  variant="outlined"
+                  className={classes.formControl}
+                  value={searchName}
+                  onChange={(e) => handleSearchName(e)}
+                />
               </Grid>
               <Grid item style={{ marginLeft: "2em" }}>
                 <Typography>Order by fields</Typography>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel></InputLabel>
-                  <Select>
-                    <option value="">Please select a value</option>
+                <FormControl
+                  variant="outlined"
+                  className={classes.formControl}
+                  onC
+                >
+                  <Select
+                    value={sortField}
+                    onChange={handleSortByField}
+                    
+                  >
                     {businessHeadings.map((heading) => (
-                      <option key={heading} value={heading}>
+                      <MenuItem key={heading} value={heading}>
                         {heading}
-                      </option>
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item className={classes.clearButton}>
-                <Button variant="outlined">Clear</Button>
+                <Button variant="outlined" onClick={handleClearButton}>
+                  Clear
+                </Button>
               </Grid>
             </Grid>
           </Paper>
@@ -219,50 +285,3 @@ function BusinessList({ setOpenDialog }) {
 }
 
 export default BusinessList;
-
-{
-  /* <TableContainer component={Paper}>
-  <Table aria-label="businesses table">
-    <TableHead>
-      <TableRow>
-        {businessHeading.map((title) => (
-          <TableCell key={title}>{title}</TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {businesses.map((business) => (
-        <TableRow key={business.name}>
-          <TableCell>{business.name}</TableCell>
-          <TableCell>{business.industry}</TableCell>
-          <TableCell>{business.sector}</TableCell>
-          <TableCell>{business.headquarter}</TableCell>
-          <TableCell>{business.year}</TableCell>
-          <TableCell>{business.notes}</TableCell>
-          <TableCell>
-            {currentUserId === business.userId ? (
-              <ButtonGroup>
-                <Button
-                  onClick={() => navigate(`/business/edit/${business.id}`)}
-                >
-                  Edit
-                </Button>
-                <Button
-                  onClick={() => {
-                    navigate(`/business/delete/${business.id}`);
-                    setOpenDialog(true);
-                  }}
-                >
-                  Delete
-                </Button>
-              </ButtonGroup>
-            ) : (
-              <Button>No action</Button>
-            )}
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>; */
-}
