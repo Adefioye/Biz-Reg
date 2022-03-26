@@ -7,9 +7,15 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
+
 import GoogleAuth from "./GoogleAuth";
 
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    background: "linear-gradient(to bottom, #081221, #03080f)",
+    height: "5em",
+    color: "#ffffff",
+  },
   homeIcon: {
     textDecoration: "none",
     color: "inherit",
@@ -21,16 +27,23 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Grid container justifyContent="space-between" direction="row">
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          direction="row"
+        >
           <Grid item>
-            <Typography component={Link} to="/" className={classes.homeIcon}>
+            <Typography
+              variant="h3"
+              component={Link}
+              to="/"
+              className={classes.homeIcon}
+            >
               BizReg
             </Typography>
-          </Grid>
-          <Grid item>
-            <Typography>Search</Typography>
           </Grid>
           <Grid item>
             <GoogleAuth />

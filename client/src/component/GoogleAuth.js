@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn, signOut } from "../actions";
+
 import Button from "@material-ui/core/Button";
+
+import { signIn, signOut } from "../actions";
+import googleIcon from "../assets/googleIcon.svg";
 
 function GoogleAuth() {
   const [auth, setAuth] = useState(null);
 
   const dispatch = useDispatch();
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+
+  const GoogleIcon = () => {
+    return (
+      <img src={googleIcon} alt="google icon" style={{ width: "1.5em" }} />
+    );
+  };
 
   useEffect(() => {
     function handleAuthChange(isSignedIn) {
@@ -54,13 +63,22 @@ function GoogleAuth() {
       return null;
     } else if (isSignedIn) {
       return (
-        <Button variant="contained" onClick={handleSignOut}>
+        <Button
+          variant="contained"
+          startIcon={<GoogleIcon />}
+          onClick={handleSignOut}
+          style={{ backgroundColor: "#ffffff", textTransform: "none" }}
+        >
           Sign Out
         </Button>
       );
     } else {
       return (
-        <Button variant="contained" onClick={handleSignIn}>
+        <Button
+          variant="contained"
+          startIcon={<GoogleIcon />}
+          onClick={handleSignIn}
+        >
           Sign In
         </Button>
       );
