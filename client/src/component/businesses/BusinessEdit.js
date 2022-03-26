@@ -20,6 +20,7 @@ function BusinessEdit() {
     dateAdded: new Date(),
     notes: "",
   });
+  
 
   useEffect(() => {
     dispatch(fetchBusiness(id));

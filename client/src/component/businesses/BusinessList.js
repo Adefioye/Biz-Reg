@@ -77,7 +77,7 @@ function BusinessList({ setOpenDialog }) {
   const navigate = useNavigate();
 
   const [searchName, setSearchName] = useState("");
-  const [sortField, setSortField] = useState("name");
+  // const [sortField, setSortField] = useState("name");
 
   useEffect(() => {
     dispatch(fetchBusinesses());
@@ -100,11 +100,11 @@ function BusinessList({ setOpenDialog }) {
     dispatch(searchByName(searchName));
   };
 
-  const handleSortByField = (e) => {
-    setSortField(e.target.value);
-    console.log(sortField);
-    dispatch(sortByField(sortField));
-  };
+  // const handleSortByField = (e) => {
+  //   setSortField(e.target.value);
+  //   console.log(sortField);
+  //   dispatch(sortByField(sortField));
+  // };
 
   const handleClearButton = () => {
     dispatch(fetchBusinesses());
@@ -207,11 +207,18 @@ function BusinessList({ setOpenDialog }) {
         >
           <Paper elevation={3}>
             <Grid item container direction="column">
-              <Grid item style={{ marginLeft: "2em" }}>
+              <Grid item style={{ marginLeft: "2em", marginTop: "2em" }}>
                 <Typography variant="h6">Filter Results:</Typography>
               </Grid>
-              <Grid item style={{ marginLeft: "2em" }}>
-                <Typography>Filter by name</Typography>
+              <Grid
+                item
+                style={{
+                  marginLeft: "2em",
+                  marginTop: "1.5em",
+                  marginBottom: "1.5em",
+                }}
+              >
+                <Typography gutterButtom>Full Search</Typography>
                 <TextField
                   variant="outlined"
                   className={classes.formControl}
@@ -220,21 +227,17 @@ function BusinessList({ setOpenDialog }) {
                 />
               </Grid>
               <Grid item style={{ marginLeft: "2em" }}>
-                <Typography>Order by fields</Typography>
-                <FormControl
-                  variant="outlined"
-                  className={classes.formControl}
-                  onC
-                >
+                <Typography gutterButtom>Order By</Typography>
+                <FormControl variant="outlined" className={classes.formControl}>
                   <Select
-                    value={sortField}
-                    onChange={handleSortByField}
-                    
+                    native
+                    onChange={(e) => dispatch(sortByField(e.target.value))}
                   >
+                    <option value=""> None</option>
                     {businessHeadings.map((heading) => (
-                      <MenuItem key={heading} value={heading}>
+                      <option key={heading} value={heading}>
                         {heading}
-                      </MenuItem>
+                      </option>
                     ))}
                   </Select>
                 </FormControl>

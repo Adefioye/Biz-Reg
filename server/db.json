@@ -12,13 +12,13 @@
       "id": 1
     },
     {
-      "name": "g",
-      "industry": "g",
-      "sector": "g",
-      "headquarter": "g",
-      "year": "4000",
+      "name": "Zenith Bank",
+      "industry": "Financials",
+      "sector": "Banks",
+      "headquarter": "Lagos",
+      "year": "1990",
       "dateAdded": "2022-03-24T09:00:24.739Z",
-      "notes": "s",
+      "notes": "Commercial bank",
       "userId": "105721580996813539692",
       "id": 2
     },
@@ -142,17 +142,6 @@
       "notes": "eerrr",
       "userId": "107751868815464507136",
       "id": 13
-    },
-    {
-      "name": "qqqq",
-      "industry": "qqq",
-      "sector": "qqqq",
-      "headquarter": "qqqqq",
-      "year": "1920",
-      "dateAdded": "2022-03-16T23:00:00.000Z",
-      "notes": "ddddd",
-      "userId": "105721580996813539692",
-      "id": 14
     }
   ]
 }
