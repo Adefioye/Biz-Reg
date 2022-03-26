@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import { useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
@@ -38,29 +39,45 @@ const useStyles = makeStyles((theme) => ({
   filterBar: {
     marginLeft: "3em",
     marginRight: "1em",
-    marginTop: "2.5em",
+    marginTop: "3.7em",
   },
-  clearButton: {
+  filterCard: {
+    backgroundColor: theme.card.background,
+    border: `5px ${theme.card.background} solid`,
+  },
+  clearButtonContainer: {
     marginRight: "2.2em",
     marginTop: "2em",
     marginBottom: "2em",
     alignSelf: "flex-end",
   },
+  clearButton: {
+    ...theme.typography.button,
+    color: "#ffffff",
+    backgroundColor: theme.palette.common.purple,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
+  },
   mainContent: {
     padding: "1em",
     marginTop: "1em",
+    backgroundColor: theme.card.background,
   },
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
+    backgroundColor: theme.palette.common.purple,
+    fontSize: "5em",
   },
   businessContent: {
     marginLeft: "2em",
-    maxWidth: "40em",
+    maxWidth: "50em",
   },
   businessId: {
     width: theme.spacing(4),
     height: theme.spacing(4),
+    backgroundColor: theme.palette.common.purple,
   },
   formControl: {
     width: "90%",
@@ -75,6 +92,8 @@ function BusinessList({ setOpenDialog }) {
   const currentUserId = useSelector((state) => state.auth.userId);
   const { businesses } = useSelector((state) => state.business);
   const navigate = useNavigate();
+
+  const theme = useTheme();
 
   const [searchName, setSearchName] = useState("");
   // const [sortField, setSortField] = useState("name");
@@ -132,7 +151,7 @@ function BusinessList({ setOpenDialog }) {
                 <Grid item className={classes.businessContent}>
                   <Grid container direction="column">
                     <Grid item>
-                      <Typography variant="h6">{business.name}</Typography>
+                      <Typography variant="h4">{business.name}</Typography>
                       <Typography variant="body1">
                         Founded: {business.year}
                       </Typography>
@@ -147,9 +166,9 @@ function BusinessList({ setOpenDialog }) {
                         Headquarter: {business.headquarter}
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="body1">
-                        Description: This business is in the {business.industry}
+                    <Grid item style={{ marginTop: "2em" }}>
+                      <Typography variant="h5">
+                        Description: This business is in the {business.industry}{" "}
                         industry and {business.sector} sector. {business.notes}
                       </Typography>
                     </Grid>
@@ -205,10 +224,10 @@ function BusinessList({ setOpenDialog }) {
           md={3}
           className={classes.filterBar}
         >
-          <Paper elevation={3}>
+          <Paper elevation={6} className={classes.filterCard}>
             <Grid item container direction="column">
               <Grid item style={{ marginLeft: "2em", marginTop: "2em" }}>
-                <Typography variant="h6">Filter Results:</Typography>
+                <Typography variant="h4">Filter Results:</Typography>
               </Grid>
               <Grid
                 item
@@ -218,7 +237,9 @@ function BusinessList({ setOpenDialog }) {
                   marginBottom: "1.5em",
                 }}
               >
-                <Typography gutterButtom>Full Search</Typography>
+                <Typography variant="h6" gutterButtom>
+                  Full Search
+                </Typography>
                 <TextField
                   variant="outlined"
                   className={classes.formControl}
@@ -227,23 +248,39 @@ function BusinessList({ setOpenDialog }) {
                 />
               </Grid>
               <Grid item style={{ marginLeft: "2em" }}>
-                <Typography gutterButtom>Order By</Typography>
+                <Typography variant="h6" gutterButtom>
+                  Order By
+                </Typography>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <Select
                     native
                     onChange={(e) => dispatch(sortByField(e.target.value))}
                   >
-                    <option value=""> None</option>
+                    <option
+                      style={{ backgroundColor: "#182c47", color: "#ffffff" }}
+                      value=""
+                    >
+                      {" "}
+                      None
+                    </option>
                     {businessHeadings.map((heading) => (
-                      <option key={heading} value={heading}>
+                      <option
+                        style={{ backgroundColor: "#182c47", color: "#ffffff" }}
+                        key={heading}
+                        value={heading}
+                      >
                         {heading}
                       </option>
                     ))}
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item className={classes.clearButton}>
-                <Button variant="outlined" onClick={handleClearButton}>
+              <Grid item className={classes.clearButtonContainer}>
+                <Button
+                  className={classes.clearButton}
+                  variant="outlined"
+                  onClick={handleClearButton}
+                >
                   Clear
                 </Button>
               </Grid>
@@ -259,7 +296,7 @@ function BusinessList({ setOpenDialog }) {
           md={8}
         >
           <Grid item>
-            <Typography align="center">
+            <Typography variant="h2" align="center">
               List of Businesses in Nigeria
             </Typography>
           </Grid>

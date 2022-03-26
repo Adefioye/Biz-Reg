@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Header from "./Header";
 import BusinessList from "./businesses/BusinessList";
@@ -16,6 +17,7 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <BrowserRouter>
           <Header />
           <Routes>
