@@ -67,7 +67,12 @@ function GoogleAuth() {
           variant="contained"
           startIcon={<GoogleIcon />}
           onClick={handleSignOut}
-          style={{ backgroundColor: "#ffffff", textTransform: "none" }}
+          style={{
+            backgroundColor: "#5692e8",
+            textTransform: "none",
+            color: "#ffffff",
+            fontWeight: 700,
+          }}
         >
           Sign Out
         </Button>
@@ -78,6 +83,12 @@ function GoogleAuth() {
           variant="contained"
           startIcon={<GoogleIcon />}
           onClick={handleSignIn}
+          style={{
+            backgroundColor: "#5692e8",
+            textTransform: "none",
+            color: "#ffffff",
+            fontWeight: 700,
+          }}
         >
           Sign In
         </Button>

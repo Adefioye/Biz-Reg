@@ -17,11 +17,25 @@ function BusinessCreate() {
     dateAdded: new Date(2022, 2, 1),
     notes: "",
   });
+  const [error, setError] = useState("");
+
+  const { name, industry, sector, headquarter, year, dateAdded, notes } = state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createBusiness(state));
-    navigate("/");
+    if (
+      name.length === 0 ||
+      industry.length === 0 ||
+      sector.length === 0 ||
+      headquarter.length === 0 ||
+      year.length === 0 ||
+      notes.length === 0
+    ) {
+      setError("*** Please provide all values ***");
+    } else {
+      dispatch(createBusiness(state));
+      navigate("/");
+    }
   };
 
   return (
@@ -31,6 +45,7 @@ function BusinessCreate() {
         onSubmit={handleSubmit}
         formValues={state}
         setFormValues={setState}
+        error={error}
       />
     </>
   );

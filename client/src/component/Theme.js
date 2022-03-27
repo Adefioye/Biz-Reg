@@ -1,8 +1,8 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
 const actionButtonColor = "#5692e8";
 
-export default createMuiTheme({
+export default createTheme({
   palette: {
     common: {
       purple: actionButtonColor,
@@ -62,16 +62,11 @@ export default createMuiTheme({
         color: "#ffffff",
         backgroundColor: "#182c47",
       },
-      select: {
-        backgroundColor: "#182c47",
-        color: "inherit",
-        padding: "0 0",
-      },
-      input: {
-        "&$selected": {
-          backgroundColor: "#182c47",
-        },
-      },
+      // input: {
+      //   "&$selected": {
+      //     backgroundColor: "#182c47",
+      //   },
+      // },
     },
     MuiSelect: {
       select: {
@@ -90,7 +85,20 @@ export default createMuiTheme({
       "@global": {
         body: {
           background: "linear-gradient(to bottom, #081221, #03080f)",
+          width: "100vw",
+          height: "500vh", // This is just a hack to transmit the style to
+          // business create and edit form
         },
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        color: "#ffffff",
+      },
+    },
+    MuiPaper: {
+      root: {
+        backgroundColor: "#0e1a2b",
       },
     },
   },

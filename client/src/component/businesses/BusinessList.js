@@ -23,23 +23,31 @@ import Select from "@material-ui/core/Select";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import MenuItem from "@material-ui/core/MenuItem";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { fetchBusinesses, searchByName, sortByField } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
   businessList: {
     paddingTop: theme.spacing(10),
-    // width: "90wh",
   },
   addIcon: {
     position: "fixed",
     bottom: "2em",
     right: "2em",
+    backgroundColor: theme.palette.common.purple,
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   filterBar: {
     marginLeft: "3em",
     marginRight: "1em",
     marginTop: "3.7em",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
   },
   filterCard: {
     backgroundColor: theme.card.background,
@@ -50,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "2em",
     marginBottom: "2em",
     alignSelf: "flex-end",
+    [theme.breakpoints.down("md")]: {
+      alignSelf: "center",
+      marginRight: 0,
+    },
   },
   clearButton: {
     ...theme.typography.button,
@@ -73,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
   businessContent: {
     marginLeft: "2em",
     maxWidth: "50em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "1em",
+    },
   },
   businessId: {
     width: theme.spacing(4),
@@ -92,8 +107,10 @@ function BusinessList({ setOpenDialog }) {
   const currentUserId = useSelector((state) => state.auth.userId);
   const { businesses } = useSelector((state) => state.business);
   const navigate = useNavigate();
-
   const theme = useTheme();
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
   const [searchName, setSearchName] = useState("");
   // const [sortField, setSortField] = useState("name");
@@ -144,37 +161,65 @@ function BusinessList({ setOpenDialog }) {
               key={business.id}
               className={classes.mainContent}
             >
-              <Grid item container alignItems="center" direction="row">
+              <Grid
+                item
+                container
+                alignItems="center"
+                direction={matchesMD ? "column" : "row"}
+              >
                 <Grid item>
                   <Avatar className={classes.avatar}>{business.name[0]}</Avatar>
                 </Grid>
                 <Grid item className={classes.businessContent}>
                   <Grid container direction="column">
                     <Grid item>
-                      <Typography variant="h4">{business.name}</Typography>
-                      <Typography variant="body1">
+                      <Typography
+                        align={matchesMD ? "center" : "inherit"}
+                        variant="h4"
+                      >
+                        {business.name}
+                      </Typography>
+                      <Typography
+                        align={matchesMD ? "center" : "inherit"}
+                        variant="body1"
+                      >
                         Founded: {business.year}
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography
+                        align={matchesMD ? "center" : "inherit"}
+                        variant="body1"
+                      >
                         Date Added:{" "}
                         {new Date(business.dateAdded).toLocaleDateString(
                           undefined,
                           options
                         )}
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography
+                        align={matchesMD ? "center" : "inherit"}
+                        variant="body1"
+                      >
                         Headquarter: {business.headquarter}
                       </Typography>
                     </Grid>
                     <Grid item style={{ marginTop: "2em" }}>
-                      <Typography variant="h5">
+                      <Typography
+                        align={matchesMD ? "center" : "inherit"}
+                        variant="h5"
+                      >
                         Description: This business is in the {business.industry}{" "}
                         industry and {business.sector} sector. {business.notes}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item style={{ marginLeft: "auto" }}>
+                <Grid
+                  item
+                  container={matchesMD ? true : false}
+                  justifyContent={matchesMD ? "center" : null}
+                  alignItems={matchesMD ? "center" : null}
+                  style={{ marginLeft: "auto" }}
+                >
                   <Avatar className={classes.businessId}>{business.id}</Avatar>
                   {currentUserId === business.userId ? (
                     <>
@@ -184,6 +229,8 @@ function BusinessList({ setOpenDialog }) {
                           marginTop: "1em",
                           marginBottom: "1em",
                           cursor: "pointer",
+                          marginRight: matchesMD ? "1em" : "inherit",
+                          marginLeft: matchesMD ? "1em" : "inherit",
                         }}
                         onClick={() =>
                           navigate(`/business/edit/${business.id}`)
@@ -216,28 +263,46 @@ function BusinessList({ setOpenDialog }) {
 
   return (
     <Grid container className={classes.businessList} direction="column">
-      <Grid item container direction="row">
+      <Grid
+        item
+        container
+        alignItems={matchesMD ? "center" : null}
+        direction={matchesMD ? "column" : "row"}
+      >
         <Grid
           item
           container
           direction="column"
-          md={3}
+          sm={10}
+          md={matchesMD ? 8 : 3}
           className={classes.filterBar}
+          style={{ marginBottom: "3em" }}
         >
           <Paper elevation={6} className={classes.filterCard}>
             <Grid item container direction="column">
-              <Grid item style={{ marginLeft: "2em", marginTop: "2em" }}>
-                <Typography variant="h4">Filter Results:</Typography>
+              <Grid
+                item
+                style={{ marginLeft: matchesMD ? 0 : "2em", marginTop: "2em" }}
+              >
+                <Typography
+                  variant="h4"
+                  align={matchesMD ? "center" : "inherit"}
+                >
+                  Filter Results:
+                </Typography>
               </Grid>
               <Grid
                 item
                 style={{
-                  marginLeft: "2em",
+                  marginLeft: matchesMD ? 0 : "2em",
                   marginTop: "1.5em",
                   marginBottom: "1.5em",
                 }}
               >
-                <Typography variant="h6" gutterButtom>
+                <Typography
+                  variant="h6"
+                  align={matchesMD ? "center" : "inherit"}
+                >
                   Full Search
                 </Typography>
                 <TextField
@@ -247,8 +312,11 @@ function BusinessList({ setOpenDialog }) {
                   onChange={(e) => handleSearchName(e)}
                 />
               </Grid>
-              <Grid item style={{ marginLeft: "2em" }}>
-                <Typography variant="h6" gutterButtom>
+              <Grid item style={{ marginLeft: matchesMD ? 0 : "2em" }}>
+                <Typography
+                  variant="h6"
+                  align={matchesMD ? "center" : "inherit"}
+                >
                   Order By
                 </Typography>
                 <FormControl variant="outlined" className={classes.formControl}>
@@ -293,7 +361,7 @@ function BusinessList({ setOpenDialog }) {
           container
           direction="column"
           style={{ marginRight: "2em" }}
-          md={8}
+          md={matchesMD ? 10 : 8}
         >
           <Grid item>
             <Typography variant="h2" align="center">
