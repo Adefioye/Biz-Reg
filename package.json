@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "biz-reg",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "axios": "^0.26.1",
     "date-fns": "2.23.0",
     "html-react-parser": "^1.4.9",
+    "json-server": "^0.17.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",

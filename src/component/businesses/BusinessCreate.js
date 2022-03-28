@@ -19,7 +19,7 @@ function BusinessCreate() {
   });
   const [error, setError] = useState("");
 
-  const { name, industry, sector, headquarter, year, dateAdded, notes } = state;
+  const { name, industry, sector, headquarter, year, notes } = state;
 
   const handleSubmit = (e) => {
     e.preventDefault();

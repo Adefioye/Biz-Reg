@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { useTheme } from "@material-ui/core/styles";
@@ -12,17 +12,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import MenuItem from "@material-ui/core/MenuItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { fetchBusinesses, searchByName, sortByField } from "../../actions";
@@ -109,8 +104,7 @@ function BusinessList({ setOpenDialog }) {
   const navigate = useNavigate();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+
 
   const [searchName, setSearchName] = useState("");
   // const [sortField, setSortField] = useState("name");
@@ -146,10 +140,10 @@ function BusinessList({ setOpenDialog }) {
     dispatch(fetchBusinesses());
   };
 
-  const handleDeletePage = (business) => {
-    navigate(`business/delete/${business.id}`);
-    setOpenDialog(true);
-  };
+  // const handleDeletePage = (business) => {
+  //   navigate(`business/delete/${business.id}`);
+  //   setOpenDialog(true);
+  // };
 
   const renderContent = () => {
     if (businesses.length !== 0) {
